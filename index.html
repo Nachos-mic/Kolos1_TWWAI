@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Technologie webowe w aplikacjach Internetu</title>
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <style>
+       body, html {
+           height: 100%;
+           margin: 0;
+       }
+   </style>
+</head>
+<body>
+
+    <section id = "user">
+
+        <h2><%= User_s %></h2>
+
+    </section>
+
+    <section id = "users">
+
+        <h2><%= Users_s %></h2>
+
+    </section>
+
+<section id="wykres">
+   <div>
+       Populacja na kontynentach
+       <canvas id="chart"></canvas>
+   </div>
+</section>
+
+<script>
+   // pobranie danych z serwera
+   const chartData = '<%-chart%>';
+
+   // pobranie referencji do miejsca wyświetlenia
+   const ctx = document.querySelector("#chart").getContext('2d');
+
+   // sparsowanie danych otrzymanych z serwera w miejscu właściwości data
+   const configChart2 = {
+       type: 'line',
+       data: JSON.parse(chartData),
+       options: {
+           scales: {
+               x: {
+                   type: 'linear',
+                   position: 'bottom'
+               },
+               y: {
+                   type: 'linear',
+                   position: 'left'
+               }
+           },
+           plugins: {
+               title: {
+                   display: true,
+                   text: 'Populacja na kontynentach'
+               }
+           }
+       }
+   };
+
+   // zbudowanie wykresu
+   new Chart(ctx, configChart2);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
